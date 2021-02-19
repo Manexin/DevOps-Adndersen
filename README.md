@@ -6,8 +6,8 @@
 # Поехали!
 ## Подготовка рабочего окружения.
 Для выполнения работ в моем распоряжении имется:
- `Processor	AMD Ryzen 5 3600 6-Core Processor, 3593 Mhz, 6 Core(s), 12 Logical Processor(s)`
- `Installed Physical Memory (RAM)	16.0 GB`
+ `Processor	AMD Ryzen 5 3600 6-Core Processor, 3593 Mhz, 6 Core(s), 12 Logical Processor(s)`<br>
+ `Installed Physical Memory (RAM)	16.0 GB`\n
  `OS Name	Microsoft Windows 10 Enterprise LTSC`
  `Version	10.0.17763 Build 17763`
 ***
