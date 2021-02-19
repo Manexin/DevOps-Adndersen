@@ -5,14 +5,14 @@
 ***
 # Поехали!
 ## Подготовка рабочего окружения.
-Для выполнения работ в моем распоряжении имется:
+Для выполнения работ в моем распоряжении имется:<br>
  `Processor	AMD Ryzen 5 3600 6-Core Processor, 3593 Mhz, 6 Core(s), 12 Logical Processor(s)`<br>
- `Installed Physical Memory (RAM)	16.0 GB`\n
- `OS Name	Microsoft Windows 10 Enterprise LTSC`
- `Version	10.0.17763 Build 17763`
+ `Installed Physical Memory (RAM)	16.0 GB`<br>
+ `OS Name	Microsoft Windows 10 Enterprise LTSC`<br>
+ `Version	10.0.17763 Build 17763`<br>
 ***
-По заданию нам понадобиться host и target с Debian 10.
-Для этого устанавливаем `VirtualBox Graphical User Interface Version 6.1.16 r140961 (Qt5.6.2)`
+По заданию нам понадобиться host и target с Debian 10.<br>
+Для этого устанавливаем `VirtualBox Graphical User Interface Version 6.1.16 r140961 (Qt5.6.2)`<br>
 Создаем новую виртуальную машину:
   * Указываем имя VM
   * Выбираем тип -- Linux
@@ -26,16 +26,18 @@
 Далее нам надо скачать дистрибутив Debian 10, берем его [здесь](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.8.0-amd64-netinst.iso).
 Вставляем его в виртуальный дисковод созданной VM и запускаем ее. При установке следуем инструкциям и рекомендациям (читаем доки). Критериев по установке Debian 10 особых не было, по этому я устанавливаю версию с GUI, SSH server, standart system utilities.
 После установки Debian настраиваем сеть. В VirtualBox на нашей машине меняем тип сетевого адаптера с NAT на Brige. Если удаленно не подключаться, то можно не менять. А для удаленной работы мешает NAT.
-Устанавливаем пакеты sudo, net-tools (говорят что это для староверов, но я пользуюсь)
-`$ su root` \\логично что если sudo нет, то устанавливаем от имени root
-`Password:` \\пароль
-`$ apt update` \\ обновляем ссылки
-`$ apt install sudo` \\ устанавливаем sudo
-`$ apt install net-tools` \\ устанавливаем net-tools
-Пакет sudo мы установили, осталось добавить нашего пользователя в нужные группы.
-Это делается так
-`$ usermod -aG sudo user`
-или так, открываем `$sudo nano /etc/group` и дописываем пользователя в нужные группы. После этого необходимо перезагрузится `$ sudo reboot`
+Устанавливаем пакеты sudo, net-tools (говорят что это для староверов, но я пользуюсь).<br>
+`$ su root` \\логично что если sudo нет, то устанавливаем от имени root<br>
+`Password:` \\пароль<br>
+`$ apt update` \\ обновляем ссылки<br>
+`$ apt install sudo` \\ устанавливаем sudo<br>
+`$ apt install net-tools` \\ устанавливаем net-tools<br>
+Пакет sudo мы установили, осталось добавить нашего пользователя в нужные группы.<br>
+Это делается так<br>
+`$ usermod -aG sudo user`<br>
+или так, открываем<br>
+`$sudo nano /etc/group` и дописываем пользователя в нужные группы.<br>
+После этого необходимо перезагрузится `$ sudo reboot`<br>
 Устанавливаем `Guest Addision:`
   * CD в виртуальный дисковод.
   * Про autorun забываем, он тут не работает.
@@ -45,16 +47,16 @@
 
 ### Вроде бы можно работать.
 ### Чуть не забыл, настраиваем ssh!
-Проверяем запущена ли служба ssh
-`$ sudo service ssh status`
-если служба отключена, то
-`$sudo service ssh start`
-Генерим пару ssh ключей, они нам понадобятся в дальнейшем.
-`$ ssh-keygen`
-и сообщаем системе (ssh-agent) о наших ключах
-`$ ssh-add`
-~/.ssh/id_rsa это закрытый ключ, никому его не показываем
-~/.ssh/id_rsa_pub это публичный ключ
+Проверяем запущена ли служба ssh<br>
+`$ sudo service ssh status`<br>
+если служба отключена, то<br>
+`$sudo service ssh start`<br>
+Генерим пару ssh ключей, они нам понадобятся в дальнейшем.<br>
+`$ ssh-keygen`<br>
+и сообщаем системе (ssh-agent) о наших ключах<br>
+`$ ssh-add`<br>
+`~/.ssh/id_rsa` это закрытый ключ, никому его не показываем<br>
+`~/.ssh/id_rsa_pub` это публичный ключ<br>
 
 ## Ну все, теперь вроде готовы. Для удаленного доступа я пользуюсь MobaXterm, но если любите все старое, то можно putty)))
 ****
