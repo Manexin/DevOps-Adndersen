@@ -24,10 +24,10 @@ then
         for IP in $(cat $mydir/last5ip)
         do
            whois $IP > $mydir/ipInfo
-           OrgCi=$(awk -F':' '/^(NetRange|Organization|City)/ {printf $2}' $mydir/ipInfo)
-           echo "$OrgCi"
+           NetOrgCi=$(awk -F':' '/^(NetRange|Organization|City)/ {printf $2}' $mydir/ipInfo)
+           echo "$NetOrgCi"
         done
-        if [[ -z $OrgCi ]]
+        if [[ -z $NetOrgCi ]]
            then
                echo "Organization and City is not known for this procces! See all information about the connections of process $1 ."
                cat $mydir/ipInfo
