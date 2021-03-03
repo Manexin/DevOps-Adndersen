@@ -63,7 +63,9 @@ There were problems passing a variable to awk as a template. Of the many trials 
 I understand it intuitively, but I can hardly explain it.
 It does not handle IPv6 correctly, so the -4 option is specified in `ss`. I don't know how to solve it, I haven't thought about it yet.<br>
 
-## We eliminate the remark about creating / deleting temporary files
+## We eliminate the remark #1.
+
+About creating/deleting temporary files
 
 `rm ~/<file>` This is a very bad practice, so it is really not acceptable to do so.<br>
 Let's use the `mktemp` utility with the `-d` parameter. <br>
@@ -72,3 +74,15 @@ where X is a random value, and in this directory we will save the temporary file
 If there are more serious security requirements, you can use the FIFO channel.<br>
 
 In the process of writing the script and eliminating comments, we learned a lot about bash scripts, especially about awk.:)
+
+## Remark #2
+
+Changing the output at the request of the customer
+
+Task-Add output: how many connections the app makes to each organization
+
+Sorted the output of ' awk` and output unique lines indicating the number of repetitions
+
+```sh
+`echo -e "\nTOTAL:\n-------------------------------------------------\n`cat $mydir/count_org | sort | uniq -c`"`
+```
