@@ -30,12 +30,13 @@ then
          done
 
          # Showing the number of connections from the organization
-         cat $mydir/count_org | sort | uniq -c
+         echo -e "\n`cat $mydir/count_org`"
+         echo -e "\nTOTAL:\n-------------------------------------------------\n`cat $mydir/count_org | sort | uniq -c`"
 
          #If there is no data about the organization, we show another information. Example - Name.
          if [[ -s $mydir/count_org ]]
             then
-                echo "This is the process information you requested."
+                echo -e "\nThe connections created by the $1 process are shown.\n"
             else
                 echo "Organization and City is not known for this procces! See all information about the connections of process $1 ."
                 cat $mydir/name
