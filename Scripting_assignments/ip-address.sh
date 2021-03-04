@@ -1,19 +1,23 @@
 #!/bin/bash
 
+
+get_process_netstat () {
+                        IP_ADDR=$(ss -4platu | awk -v pattern="$1" '$7 ~ pattern {print $6}' | cut -d: -f1);}
 # Check whether the script is running with the argument or not.
 if [[ -n "$1" ]]
 then
-    # Creating a directory for temporary files.
-    mydir=$(mktemp -d "${TMPDIR:-/tmp/}$(basename $0).XXXXX")
-
-    # Getting network data
-    ss -4platu > $mydir/connect
-
+    
     # We make a pattern matching in accordance with the accepted argument.
-    awk -v pattern="$1" '$7 ~ pattern {print $6}' $mydir/connect > $mydir/ipPort
+    get_process_netstat $1
+
+    echo -e "$IP_ADDR" | sort | uniq -c | sort | tail -n 5 #| xargs -n2
+
+# this is worked!!!!!
+
+#awk -v pattern="$1" '$7 ~ pattern {print $6}' $mydir/connect > $mydir/ipPort
 
     # In the received data, we leave the last five unique IP addresses without ports.
-    cut -d: -f1 $mydir/ipPort | uniq -u > $mydir/ip
+#    cut -d: -f1 $mydir/ipPort | uniq -u > $mydir/ip
     tail -n5 $mydir/ip > $mydir/last5ip
 
     # Check whether there are network connections for the specified process.
