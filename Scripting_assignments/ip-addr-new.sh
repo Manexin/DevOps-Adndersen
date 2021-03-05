@@ -1,56 +1,31 @@
 #!/bin/bash
-
+#This script determines the OrgName that the IP address belongs to and the amount of connections.
 
 get_process_netstat () {
-                        IP_ADDR=$(ss -4platu | awk -v pattern="$1" '$7 ~ pattern {print $6}' | cut -d: -f1);}
+                        IP_ADDR=$(ss -4platu | awk -v pattern="$1" '$7 ~ pattern {print $6}' | cut -d: -f1)
+                       }
 # Check whether the script is running with the argument or not.
 if [[ -n "$1" ]]
-then
-    
+ then
+
     # We make a pattern matching in accordance with the accepted argument.
     get_process_netstat $1
 
-    echo -e "$IP_ADDR" | sort | uniq -c | sort | tail -n 5 #| xargs -n2
+    # Select the 5 IP-addresses with the highest number of connections
+    last5_ip=`echo -e "$IP_ADDR" | sort | uniq -c | sort | tail -n 5`
 
-# this is worked!!!!!
-
-#awk -v pattern="$1" '$7 ~ pattern {print $6}' $mydir/connect > $mydir/ipPort
-
-    # In the received data, we leave the last five unique IP addresses without ports.
-#    cut -d: -f1 $mydir/ipPort | uniq -u > $mydir/ip
-    tail -n5 $mydir/ip > $mydir/last5ip
+    # Fetching and Outputting data
+    echo "Number of TCP connections established to these IP-addresses:"
+    echo -e "$last5_ip\n\nName and quantity of organizations:\n----------------------------------------------------------"
+    echo -e "$last5_ip" | awk '{print $2}' | xargs -L 1 whois | awk -F':' '/^OrgName/ {print $2}' | sort | uniq -c | sort
 
     # Check whether there are network connections for the specified process.
-    if [[ -s $mydir/last5ip  ]]
+    if [[ -z $IP_ADDR ]]
        then
-         touch $mydir/count_org
-
-         # Getting information about IP addresses
-         for IP in $(cat $mydir/last5ip)
-           do
-            whois $IP > $mydir/ipInfo
-            awk -F':' '/^Organization/ {print $2}' $mydir/ipInfo  >> $mydir/count_org
-            awk -F':' '$1 ~ /[nN]ame/ {print}' $mydir/ipInfo  > $mydir/name
-         done
-
-         # Showing the number of connections from the organization
-         echo -e "\n`cat $mydir/count_org`"
-         echo -e "\nTOTAL:\n-------------------------------------------------\n`cat $mydir/count_org | sort | uniq -c`"
-
-         #If there is no data about the organization, we show another information. Example - Name.
-         if [[ -s $mydir/count_org ]]
-            then
-                echo -e "\nThe connections created by the $1 process are shown.\n"
-            else
-                echo "Organization and City is not known for this procces! See all information about the connections of process $1 ."
-                cat $mydir/name
-         fi
-
-         # Deleting the temporary directory. I'm not sure that you can do this, but it seems nothing criminal.
-         rm -r $mydir
+        echo "Process not found, please try another process."
        else
-         echo "Process not found, please try another process."
-     fi
+         echo "END"
+    fi
 else
-    echo "When calling the script, specify the process name as a variable."
+   echo "When calling the script, specify the process name as a variable. Example: bash ip-addr-new.sh nextcloud"
 fi
