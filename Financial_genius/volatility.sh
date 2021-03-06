@@ -7,7 +7,7 @@
 #FUNCTIONS
 
 get_true_dates (){
-	        NORMAL_DATE=$(jq -j '.prices[][0] | (./1000 | strftime (" %m-%Y"))' quotes.json)
+	        NORMAL_DATE=$(jq -c '.prices[][0] |= (./1000 | strftime ("%m-%Y")) | .prices[] | .[]' quotes.json)
 		}
 get_currency_rate (){
 		CUR_RATE=$(jq -j '.prices[][1]' quotes.json)
@@ -15,22 +15,31 @@ get_currency_rate (){
 get_join_as (){
 		local IFS="$1"; shift; echo "$*";
 		}
-
-
-# WORCED IF
+true_quote (){
+		NEW_QUOTE=
+		}
+# WORKED IF
+#--------------------------------------
 #echo -n "Enter number of 'month':"
 #read month
-#if [[(($month -ge 1))&&(($month  -le 12))]]
+#if [ $month -ge 1 ]&&[ $month -le 12 ]
 #   then
 #     echo "The lowest volatility in the month $month was in the year:"
+#     if  [[ $month == [0-9] ]]
+#        then
+#          pattern=0$month
+#        else
+#          pattern=$month
+#	fi
 #   else
 #     echo "You enter wrong number month"
 #     exit
 #fi
+#--------------------------------------------------
 
 #jq --arg date "03-15" '.prices[][0] |= (. / 1000 | strftime("%m-%Y")) | map(select(.prices[][0] == $date))' quotes.json
 
-jq -r '.prices[][0] |= (. / 1000 | strftime("%m-%Y")) | .prices[] | .[]' quotes.json
+#jq -c '.prices[][0] |= (. / 1000 | strftime("%m-%Y")) | .prices[] | .[]' quotes.json
 
 #mydir=$(mktemp -d "${TMPDIR:-/tmp/}$(basename $0).XXXXX")
 
@@ -45,10 +54,11 @@ jq -r '.prices[][0] |= (. / 1000 | strftime("%m-%Y")) | .prices[] | .[]' quotes.
 
 # jq '.date' $mydir/new_quotes.json
 # echo $quotes
-# jq '.prices[][0], .prices[][1]' quotes.json 
-# qu_pri=$(jq '.prices[][0] | (. /1000)' quotes.json | jq 'todate ("% m-% Y")')
-# echo "$qu_pri"
-# get_true_dates
+
+
+
+
+#get_true_dates
 # get_currency_rate
 #echo "$NORMAL_DATE"
 #echo "$CUR_RATE"
@@ -59,7 +69,7 @@ jq -r '.prices[][0] |= (. / 1000 | strftime("%m-%Y")) | .prices[] | .[]' quotes.
 #NOT WORKED
 #test=$(xargs -L 1 get_join_as - "$NORMAL_DATE" "$CUR_RATE")
 #echo -e "$test"
-# get_join_as - t e s t i n g 
+#get_join_as - t e   -- ''s"" t i n g 
 
 #WORKED FOR
 #for new_dates in $dates;
