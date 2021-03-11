@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-ssh key fuck
-=======
-create file1
->>>>>>> e59522d3c38ed7b27ec2793cee9de7329d9371d9
