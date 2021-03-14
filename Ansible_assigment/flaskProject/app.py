@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from random import randint
 import emoji
 
@@ -21,7 +21,16 @@ def home():
 
         rez = outline + '\n'
         return rez
+    return render_template("index.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/homework")
+def homework():
+    return render_template("homework.html")
 
 
 
