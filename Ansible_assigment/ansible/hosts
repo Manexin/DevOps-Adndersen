@@ -1,3 +1,2 @@
-[staging_servers]
-debian-tar2 ansible_host=192.168.0.97 ansible_user=alex ansible_ssh_private_key_file=/home/alex/.ssh/target_key.pub
-
+[STAGING_SERVERS]
+debian-tar2 ansible_host=192.168.0.97
