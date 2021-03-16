@@ -43,3 +43,31 @@ If that doesn't work, try this:<br>
 After then we can disable authorization password.<br>
 Open the configuration file `/etc/ssh/sshd_config` and set the value `PasswordAuthenticatin No`<br>
 Restart service sshd again.
+### Installing Ansible.
+***
+`$ sudo apt-get update`<br>
+`$ sudo apt-get install ansible`<br>
+You can install Ansible via ' pip`, but there are some features that are partially described [here](https://github.com/Manexin/DevOps-Adndersen/blob/master/Ansible_assigment/issue-python3.md)<br>
+***
+#### Checking the installation
+```
+$ ansible --version
+ansible 2.10.6
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/alex/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.7/dist-packages/ansible
+  executable location = /usr/local/bin/ansible
+  python version = 3.7.3 (default, Jul 25 2020, 13:03:44) [GCC 8.3.0]
+```
+
+By default, Ansible searches for the configuration and inventory file in the folder from which it was launched, if there are no such files, then in `/etc/ansible/ansible.cfg`<br>
+You can create these files for each project separately in the `./myProject/ansible` folder.
+***
+### Let's start writing our first ansible.cfg
+
+```
+[defaults]
+host_key_checking  = false # disables confirmation for adding a new host to the known ones (if there are hundreds of servers, it will be very tedious)
+inventory          = ./hosts # list of our servers, authorization methods, groups
+interpreter_python = /usr/bin/python3.7 # exactly specify the path where to look for Python3
+```
