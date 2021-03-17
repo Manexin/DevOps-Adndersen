@@ -1,0 +1,21 @@
+---
+- name: Test connection to my servers
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Ping my servers
+    ping:
+    register: output
+
+  - name: Print output
+    debug: var=output.ping
+
+  - name: Install Apache Web server for RedHat
+    yum: name=httpd state=latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Apache Web server for Debian
+    apt: name=apache2 state=latest
+    when: ansible_os_family == "Debian"
+
