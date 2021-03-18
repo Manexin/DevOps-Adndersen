@@ -8,7 +8,7 @@
     ping:
     register: output
 
-  - name: Print output
+  - name: Print result ping
     debug: var=output.ping
 
   - name: Install Apache Web server for RedHat
@@ -19,3 +19,35 @@
     apt: name=apache2 state=latest
     when: ansible_os_family == "Debian"
 
+  - name: Start Apache Web Server Debian
+    service: name=apache2 state=started enabled=yes
+    notify: Restart Apache Debian
+
+  - name: Start Apache Web Server RedHat
+    service: name=httpd state=started enabled=yes
+    when: ansible_os_family == "RedHat"
+    notify: Restart Apache RedHat
+
+  - name: Install UFW RedHat
+    yum: name=ufw state=latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Install UFW Debian
+    apt: name=ufw state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Added allow WWW UFW
+    shell: ufw allow 'WWW Full'
+
+  - name: Added allow OpenSSH
+    shell: ufw allow 'OpenSSH'
+
+  - name: Started UFW
+    service: name=ufw state=started enabled=yes
+
+  handlers:
+  - name: Restart Apache Debian
+    service: name=apach2 state=restarted
+
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted

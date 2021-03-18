@@ -1,0 +1,71 @@
+---
+- name: Test connection to my servers
+  hosts: all
+  become: yes
+
+  vars:
+    source_folder: ./flask_app
+    dest_folder: ~/
+  tasks:
+
+  - name: Ping my servers
+    ping:
+    register: output
+
+  - name: Print result ping
+    debug: var=output.ping
+
+  - name: Check and Print Linux distributive
+    debug: var=ansible_os_family
+
+  - block: # ------Block for RedHat------
+
+      - name: Install Apache Web server for RedHat
+        yum: name=httpd state=latest
+
+      - name: Start Apache Web Server service for RedHat
+        service: name=httpd state=started enabled=yes
+
+      - name: Install UFW RedHat
+        yum: name=ufw state=latest
+
+    when: ansible_os_family == "RedHat"
+
+  - block: # ------Block for Debian-----
+
+      - name: Install Apache Web server for Debian
+        apt: name=apache2 state=latest
+
+      - name: Start Apache Web Server Debian
+        service: name=apache2 state=started enabled=yes
+
+      - name: Install UFW Debian
+        apt: name=ufw state=latest
+
+    when: ansible_os_family == "Debian"
+
+    - name: Copy Flask-app to Web Server
+      copy: scr={{ item }} dest={{ dest_folder }} mode 0555
+      with_fileglob: "{{ source_folder }}/*.*"
+      notify:
+          - Restart Apache RedHat
+          - Restart Apache Debian
+
+  - name: Added allow WWW UFW
+    shell: ufw allow 'WWW Full'
+
+  - name: Added allow OpenSSH
+    shell: ufw allow 'OpenSSH'
+
+  - name: Started UFW
+    service: name=ufw state=started enabled=yes
+
+  handlers:
+          - name: Restart Apache RedHat
+            service: name=httpd state=restarted
+            when: ansible_os_family == "RedHat"
+
+          - name: Restart Apache Debian
+            service: name=apache2 state=restarted
+            when: ansible_os_family == "Debian"
+
