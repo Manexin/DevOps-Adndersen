@@ -5,7 +5,7 @@
 
   vars:
     source_folder: ./flask_app
-    dest_folder: ~/
+    dest_folder: ~/app
   tasks:
 
   - name: Ping my servers
@@ -17,6 +17,12 @@
 
   - name: Check and Print Linux distributive
     debug: var=ansible_os_family
+
+
+
+
+
+
 
   - block: # ------Block for RedHat------
 
@@ -44,12 +50,15 @@
 
     when: ansible_os_family == "Debian"
 
-    - name: Copy Flask-app to Web Server
-      copy: scr={{ item }} dest={{ dest_folder }} mode 0555
-      with_fileglob: "{{ source_folder }}/*.*"
-      notify:
-          - Restart Apache RedHat
-          - Restart Apache Debian
+  - name: Create app folder
+    file: path={{ dest_folder }} state=directory
+    
+  - name: Copy Flask-app to Web Server
+    copy: scr={{ item }} dest={{ dest_folder }} mode 0555
+    with_fileglob: "{{ source_folder }}/*.*"
+    notify:
+        - Restart Apache RedHat
+        - Restart Apache Debian
 
   - name: Added allow WWW UFW
     shell: ufw allow 'WWW Full'

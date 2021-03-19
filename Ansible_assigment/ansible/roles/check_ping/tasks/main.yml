@@ -1,0 +1,11 @@
+---
+# tasks file for check_ping
+- name: Ping my servers
+  ping:
+  register: output
+
+- name: Print result ping
+  debug: var=output.ping
+
+- name: Check and Print Linux distributive
+  debug: var=ansible_os_family

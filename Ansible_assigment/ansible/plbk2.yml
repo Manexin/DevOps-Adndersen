@@ -1,0 +1,62 @@
+---
+- name: Test connection to my servers
+  hosts: "{{ MYHOSTS }}"
+  become: yes
+
+  vars:
+    source_folder: ./flask_app
+    dest_folder: ~/app
+
+  roles:
+    - check_ping
+    - { role: installing_software, when: ansible_system == 'Linux' }
+
+  tasks:
+
+  - name: Create app folder
+    file: path={{ dest_folder }} state=directory
+  
+# - name: Copy Flask-app to Web Server
+#      copy: 
+#        scr: {{ item }}
+#        dest: {{ dest_folder }}
+#        owner: flask_app
+#        group: www-data
+#        mode: 0644
+#      with_fileglob: "{{ source_folder }}/*.*"
+#      notify:
+#         - Restart Apache RedHat
+#         - Restart Apache Debian
+
+
+#  - name: Copy Flask-app to Web Server
+#    copy: scr={{ item }} dest={{ dest_folder }} mode 0555
+#    with_fileglob: "{{ source_folder }}/*.*"
+#    notify:
+#        - Restart Apache RedHat
+#        - Restart Apache Debian
+
+  - name: Install `Flask`, `emoji`
+    pip: name={{ item }} state=latest
+    loop:
+      - Flask
+      - emoji
+
+#  - name: Added allow WWW UFW
+#    shell: ufw allow 'WWW Full'
+
+#  - name: Added allow OpenSSH
+#    shell: ufw allow 'OpenSSH'
+
+#  - name: Started UFW
+#    service: name=ufw state=started enabled=yes
+
+  handlers:
+     - name: Restart Apache RedHat
+       service: name=httpd state=restarted
+       when: ansible_os_family == "RedHat"
+
+     - name: Restart Apache Debian
+       service: name=apache2 state=restarted
+       when: ansible_os_family == "Debian"
+

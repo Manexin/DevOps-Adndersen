@@ -1,2 +1,10 @@
-[STAGING_SERVERS]
+[STAGING]
 debian-tar2 ansible_host=192.168.0.97
+
+[PROD]
+
+
+[ALL_SERVERS:children]
+STAGING
+PROD
+
