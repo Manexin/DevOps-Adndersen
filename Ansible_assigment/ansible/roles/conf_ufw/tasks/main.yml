@@ -1,0 +1,13 @@
+---
+# tasks file for conf_ufw
+- name: allow WWW Full OpenSSH for UFW
+  community.general.ufw:
+     rule: allow
+     name: '{{ item }}'
+  loop:
+    - "WWW Full"
+    - "OpenSSH"
+
+- name: Started UFW
+  service: name=ufw state=started enabled=yes
+
