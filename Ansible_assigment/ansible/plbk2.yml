@@ -5,16 +5,17 @@
 
   vars:
     source_folder: ./flask_app
-    dest_folder: ~/app
+    dest_folder: /srv/flask_app
 
   roles:
     - check_ping
     - { role: installing_software, when: ansible_system == 'Linux' }
+    - conf_ufw
 
   tasks:
 
-  - name: Create app folder
-    file: path={{ dest_folder }} state=directory
+#  - name: Create app folder
+#    file: path={{ dest_folder }} state=directory
   
 # - name: Copy Flask-app to Web Server
 #      copy: 
@@ -41,15 +42,6 @@
     loop:
       - Flask
       - emoji
-
-#  - name: Added allow WWW UFW
-#    shell: ufw allow 'WWW Full'
-
-#  - name: Added allow OpenSSH
-#    shell: ufw allow 'OpenSSH'
-
-#  - name: Started UFW
-#    service: name=ufw state=started enabled=yes
 
   handlers:
      - name: Restart Apache RedHat
