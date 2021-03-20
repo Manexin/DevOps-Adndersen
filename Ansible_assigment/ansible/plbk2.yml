@@ -4,8 +4,9 @@
   become: yes
 
   vars:
-    source_folder: ./flask_app
-    dest_folder: /srv/flask_app
+    user_app: flaskapp
+    source_folder: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/flask_app
+    dest_folder: /home/{{ user_app }}
 
   roles:
     - check_ping
@@ -14,28 +15,27 @@
 
   tasks:
 
+  - name: Added new user for app
+    ansible.builtin.user:
+      name: '{{ user_app }}'
+      comment: User for app flask-emoji
+      group: www-data
+      groups: www-data, ssh
+      state: present
+
 #  - name: Create app folder
-#    file: path={{ dest_folder }} state=directory
+#    file: path={{ dest_folder }}/flask_app state=directory
   
-# - name: Copy Flask-app to Web Server
-#      copy: 
-#        scr: {{ item }}
-#        dest: {{ dest_folder }}
-#        owner: flask_app
-#        group: www-data
-#        mode: 0644
-#      with_fileglob: "{{ source_folder }}/*.*"
-#      notify:
-#         - Restart Apache RedHat
-#         - Restart Apache Debian
-
-
-#  - name: Copy Flask-app to Web Server
-#    copy: scr={{ item }} dest={{ dest_folder }} mode 0555
-#    with_fileglob: "{{ source_folder }}/*.*"
-#    notify:
-#        - Restart Apache RedHat
-#        - Restart Apache Debian
+  - name: Copy Flask-app to Web Server
+    ansible.builtin.copy:
+      scr: "{{ source_folder }}"
+      dest: "{{ dest_folder }}"
+      owner: "{{ user_app }}"
+      mode: 0744
+#    with_fileglob: "{{ source_folder }}"
+    notify:
+        - Restart Apache RedHat
+        - Restart Apache Debian
 
   - name: Install `Flask`, `emoji`
     pip: name={{ item }} state=latest
