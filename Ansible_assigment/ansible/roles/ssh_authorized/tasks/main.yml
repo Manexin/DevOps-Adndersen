@@ -1,0 +1,7 @@
+---
+# tasks file for ssh_authorized
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+      user: "{{ user_app }}"
+      state: present
+      key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

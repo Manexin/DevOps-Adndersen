@@ -1,0 +1,26 @@
+---
+# tasks file for copy_files
+- block:
+
+  - name: Copy app to server
+    copy:
+      src: ./flask_app/app.py
+      dest: "{{ dest_folder }}"
+
+  - name: Copy files to web server
+    copy:
+      src: "{{ item }}"
+      dest: /var/www/html/
+      owner: "{{ user_app }}"
+      mode: 0644
+    with_fileglob: "{{ source_folder }}/templates/*"
+  notify:
+      - Restart Apache RedHat
+      - Restart Apache Debian
+
+#- name: Copy sshd_config
+#  copy:
+#  dest: /etc/ssh/ 
+#  force: yes
+#  notify:
+#      - Restart sshd

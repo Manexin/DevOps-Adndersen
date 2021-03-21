@@ -1,0 +1,3 @@
+---
+# vars file for ssh_authorized
+user_app: flaskapp

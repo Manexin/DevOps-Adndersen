@@ -1,0 +1,12 @@
+---
+# tasks file for add_user_
+- name: Added new user for app and generate ssh-key
+  ansible.builtin.user:
+      name: "{{ user_app }}"
+      comment: User for flask-emoji app
+      group: www-data
+      groups: www-data, ssh
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      state: present

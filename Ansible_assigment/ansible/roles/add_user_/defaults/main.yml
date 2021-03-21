@@ -1,0 +1,3 @@
+---
+# defaults file for add_user_
+user_app: flaskapp

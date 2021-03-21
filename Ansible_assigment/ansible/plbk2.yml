@@ -5,37 +5,40 @@
 
   vars:
     user_app: flaskapp
-    source_folder: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/flask_app
-    dest_folder: /home/{{ user_app }}
-
+    source_folder: ./flask_app
+    dest_folder: /home/flaskapp
+    
   roles:
     - check_ping
     - { role: installing_software, when: ansible_system == 'Linux' }
+    - add_user_
+    - ssh_authorized
     - conf_ufw
+#    - copy_files
 
   tasks:
-
-  - name: Added new user for app
-    ansible.builtin.user:
-      name: '{{ user_app }}'
-      comment: User for app flask-emoji
-      group: www-data
-      groups: www-data, ssh
-      state: present
-
+  
 #  - name: Create app folder
 #    file: path={{ dest_folder }}/flask_app state=directory
-  
-  - name: Copy Flask-app to Web Server
-    ansible.builtin.copy:
-      scr: "{{ source_folder }}"
-      dest: "{{ dest_folder }}"
-      owner: "{{ user_app }}"
-      mode: 0744
-#    with_fileglob: "{{ source_folder }}"
-    notify:
-        - Restart Apache RedHat
-        - Restart Apache Debian
+
+#  - name: Copy Flask-app to Server
+#    ansible.builtin.copy:
+#      scr: "{{ source_folder }}"
+#      dest: "{{ dest_folder }}"
+#      owner: "{{ user_app }}"
+#      mode: 0744
+#    notify:
+#        - Restart Apache RedHat
+#        - Restart Apache Debian
+
+#  - name: Synchronization of src on the control machine to dest on the remote hosts
+#    synchronize:
+#      mode: push
+#      src: "{{ source_folder }}"
+#      dest: "{{ dest_folder }}"
+#    notify:
+#        - Restart Apache RedHat
+#        - Restart Apache Debian
 
   - name: Install `Flask`, `emoji`
     pip: name={{ item }} state=latest
@@ -43,12 +46,12 @@
       - Flask
       - emoji
 
-  handlers:
-     - name: Restart Apache RedHat
-       service: name=httpd state=restarted
-       when: ansible_os_family == "RedHat"
+#  handlers:
+#     - name: Restart Apache RedHat
+#       service: name=httpd state=restarted
+#       when: ansible_os_family == "RedHat"
 
-     - name: Restart Apache Debian
-       service: name=apache2 state=restarted
-       when: ansible_os_family == "Debian"
+#     - name: Restart Apache Debian
+#       service: name=apache2 state=restarted
+#       when: ansible_os_family == "Debian"
 
