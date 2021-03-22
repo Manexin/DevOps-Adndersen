@@ -1,12 +1,15 @@
+
+
+
 ---
 - name: Test connection to my servers
   hosts: "{{ MYHOSTS }}"
   become: yes
 
-  vars:
-    user_app: flaskapp
-    source_folder: ./flask_app
-    dest_folder: /home/flaskapp
+#  vars:
+#    user_app: flaskapp
+#    source_folder: ./flask_app
+#    dest_folder: /home/flaskapp
     
   roles:
     - check_ping
@@ -14,31 +17,12 @@
     - add_user_
     - ssh_authorized
     - conf_ufw
-#    - copy_files
+    - copy_files
 
   tasks:
   
 #  - name: Create app folder
 #    file: path={{ dest_folder }}/flask_app state=directory
-
-#  - name: Copy Flask-app to Server
-#    ansible.builtin.copy:
-#      scr: "{{ source_folder }}"
-#      dest: "{{ dest_folder }}"
-#      owner: "{{ user_app }}"
-#      mode: 0744
-#    notify:
-#        - Restart Apache RedHat
-#        - Restart Apache Debian
-
-#  - name: Synchronization of src on the control machine to dest on the remote hosts
-#    synchronize:
-#      mode: push
-#      src: "{{ source_folder }}"
-#      dest: "{{ dest_folder }}"
-#    notify:
-#        - Restart Apache RedHat
-#        - Restart Apache Debian
 
   - name: Install `Flask`, `emoji`
     pip: name={{ item }} state=latest

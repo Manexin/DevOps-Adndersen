@@ -8,6 +8,6 @@
   service: name=apache2 state=restarted
   when: ansible_os_family == "Debian"
 
-- name: Restart sshd
-  service: name=sshd state=restarted
+#- name: Restart sshd
+#  service: name=sshd state=restarted
 

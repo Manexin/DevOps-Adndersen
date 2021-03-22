@@ -53,5 +53,11 @@
       - python3-pip
       - python3-virtualenv
 
+  - name: Install rsync
+    apt: name=rsync state=latest
+
+#  - name: Start service rsync
+#    service: name=rsync state=enable enebled=yes
+
   when: ansible_os_family == "Debian"
 
