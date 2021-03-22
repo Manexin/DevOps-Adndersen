@@ -28,6 +28,9 @@
       - rh-python37-virtualenv
       - rh-python37-PyYAML
 
+  - name: Install rsync
+    yum: name=rsync state=latest
+
   when: ansible_os_family == "RedHat"
 
 - block: # ------Block for Debian-----
@@ -55,9 +58,6 @@
 
   - name: Install rsync
     apt: name=rsync state=latest
-
-#  - name: Start service rsync
-#    service: name=rsync state=enable enebled=yes
 
   when: ansible_os_family == "Debian"
 

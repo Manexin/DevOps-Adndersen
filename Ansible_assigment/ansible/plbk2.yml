@@ -6,10 +6,10 @@
   hosts: "{{ MYHOSTS }}"
   become: yes
 
-#  vars:
+  vars:
 #    user_app: flaskapp
 #    source_folder: ./flask_app
-#    dest_folder: /home/flaskapp
+    dest_folder: /home/flaskapp
     
   roles:
     - check_ping
@@ -21,14 +21,30 @@
 
   tasks:
   
-#  - name: Create app folder
-#    file: path={{ dest_folder }}/flask_app state=directory
+  - name: Create app folder
+    file: path={{ dest_folder }}/f_app state=directory
 
-  - name: Install `Flask`, `emoji`
+  - name: Install mod_wsgi
+    apt: name=libapache2-mod-wsgi-py3 state=latest
+
+  - name: Install virtualenv
     pip: name={{ item }} state=latest
     loop:
-      - Flask
-      - emoji
+        - virtualenv
+        - numpy
+
+  - name: installing packages `Flask`, `emoji` to virtualenv
+    pip:
+      name:
+        - flask
+        - emoji
+      virtualenv: "{{ dest_folder }}/f_app"
+
+#  - name: Install `Flask`, `emoji`
+#    pip: name={{ item }} state=absent
+#    loop:
+#      - Flask
+#      - emoji
 
 #  handlers:
 #     - name: Restart Apache RedHat
