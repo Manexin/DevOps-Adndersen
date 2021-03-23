@@ -1,4 +1,4 @@
 ---
 # defaults file for copy_files
 source_folder: ./flask_app
-dest_folder: /home/flaskapp
+dest_folder: /var/www

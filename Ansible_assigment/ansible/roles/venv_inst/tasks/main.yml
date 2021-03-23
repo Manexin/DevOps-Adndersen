@@ -1,0 +1,17 @@
+---
+# tasks file for venv_inst
+- name: Install virtualenv
+  pip: name={{ item }} state=latest
+  loop:
+      - virtualenv
+      - numpy
+
+- name: Create venv and installing packages Flask, emoji
+  pip:
+    name:
+      - flask
+      - emoji
+    virtualenv: "{{ dest_folder }}/flask_app/venv"
+    virtualenv_command: pyvenv
+    state: present
+

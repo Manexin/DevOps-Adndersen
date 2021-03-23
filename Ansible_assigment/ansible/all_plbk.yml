@@ -1,0 +1,87 @@
+---
+- name: Test connection to my servers
+  hosts: "{{ MYHOSTS }}"
+  become: yes
+
+#  vars:
+
+  tasks:
+
+  - block: # ------Block for Debian-----
+
+    - name: Update Deb
+      apt:
+        update_cache: yes
+
+    - name: Install curl
+      apt: name=curl state=latest
+
+    - name: Install Apache Web server for Debian
+      apt: name=apache2 state=latest
+
+    - name: Start Apache Web Server Debian
+      service: name=apache2 state=started enabled=yes
+
+    - name: Instal Python3
+      apt: name=python3 state=latest
+
+    - name: Install mod_wsgi
+      apt: name=libapache2-mod-wsgi-py3 state=latest
+      notify:
+        - Restart Apache Debian
+
+    - name: start wsgi
+      command: a2enmod wsgi
+      notify: 
+        - Restart Apache Debian
+
+    - name: Install PIP, virtualenv
+      apt: name={{ item }} state=latest
+      loop:
+        - python3-pip
+        - python3-virtualenv
+
+    - name: Install rsync
+      apt: name=rsync state=latest
+
+    - name: Install UFW
+      apt: name=ufw state=latest
+
+    when: ansible_os_family == "Debian"
+#------------Copy wsgi--------------------------------------------------------
+  - name: Copy file wsgi
+    ansible.builtin.copy:
+       src: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/files/flask_app.wsgi
+       dest: /var/www/flask_app/
+       owner: root
+       group: root
+       mode: '0764'
+    notify:
+       - Restart Apache Debian
+
+  - name: Copy file apache
+    ansible.builtin.copy:
+       src: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/files/flask_app.conf
+       dest: /etc/apache2/sites-available/
+       owner: root
+       group: root
+       mode: '0764'
+    notify:
+       - Restart Apache Debian
+#-------------------------Copy app files-----------------------------------------
+  - name: Create folder for app
+    file: path=/var/www/flask_app state=directory
+
+  - name: Synchronization of src on the control machine to dest on the remote hosts
+    synchronize:
+      mode: push
+      src: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/roles/copy_files/files/flask_app
+      dest: /var/www/flask_app
+    notify:
+        - Restart Apache Debian
+
+  handlers:
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"

@@ -1,0 +1,23 @@
+---
+# tasks file for wsgi_apache_cfg
+- name: Copy file wsgi
+  ansible.builtin.copy:
+     src: ./flask_app.wsgi
+     dest: /var/www/flask_app/
+     owner: flaskapp
+     group: www-data
+     mode: '0764'
+  notify:
+       - Restart Apache RedHat
+       - Restart Apache Debian
+
+- name: Copy file apache 
+  ansible.builtin.copy:
+     src: ./flask_app.conf                
+     dest: /etc/apache2/sites-available/
+     owner: flaskapp
+     group: www-data
+     mode: '0764'
+  notify:
+    - Restart Apache RedHat
+    - Restart Apache Debian

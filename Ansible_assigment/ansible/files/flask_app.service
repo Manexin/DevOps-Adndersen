@@ -1,0 +1,25 @@
+[Unit]
+Description=flask_app
+After=syslog.target
+After=network.target
+After=apache2.service
+After=venv.service
+
+[Service]
+Type=forking
+WorkingDirectory=/var/www/flask_app
+
+User=flask_app
+Group=www-data
+
+Environment=RACK_ENV=production
+
+OOMScoreAdjust=-1000
+
+#ExecStart=/usr/local/bin/bundle exec service -C /work/www/myunit/shared/config/service.rb --daemon
+#ExecStop=/usr/local/bin/bundle exec service -S /work/www/myunit/shared/tmp/pids/service.state stop
+#ExecReload=/usr/local/bin/bundle exec service -S /work/www/myunit/shared/tmp/pids/service.state restart
+#TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target
