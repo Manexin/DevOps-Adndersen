@@ -1,57 +1,24 @@
-
-
-
 ---
 - name: Test connection to my servers
   hosts: "{{ MYHOSTS }}"
   become: yes
 
-  vars:
-#    user_app: flaskapp
-#    source_folder: ./flask_app
-    dest_folder: /home/flaskapp
-    
   roles:
     - check_ping
     - { role: installing_software, when: ansible_system == 'Linux' }
     - add_user_
+    - venv_inst
+    - copy_files
+#    - wsgi_apache_cfg
     - ssh_authorized
     - conf_ufw
-    - copy_files
 
   tasks:
-  
-  - name: Create app folder
-    file: path={{ dest_folder }}/f_app state=directory
 
-  - name: Install mod_wsgi
-    apt: name=libapache2-mod-wsgi-py3 state=latest
+  - name: start wsgi
+    command: a2enmod wsgi
 
-  - name: Install virtualenv
-    pip: name={{ item }} state=latest
-    loop:
-        - virtualenv
-        - numpy
-
-  - name: installing packages `Flask`, `emoji` to virtualenv
-    pip:
-      name:
-        - flask
-        - emoji
-      virtualenv: "{{ dest_folder }}/f_app"
-
-#  - name: Install `Flask`, `emoji`
-#    pip: name={{ item }} state=absent
-#    loop:
-#      - Flask
-#      - emoji
-
-#  handlers:
-#     - name: Restart Apache RedHat
-#       service: name=httpd state=restarted
-#       when: ansible_os_family == "RedHat"
-
-#     - name: Restart Apache Debian
-#       service: name=apache2 state=restarted
-#       when: ansible_os_family == "Debian"
-
+  - name: Restart Apache
+    service: name=apache2 state=restarted
+#  - name: start venv
+#    command: python3 venv venv

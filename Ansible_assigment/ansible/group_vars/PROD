@@ -1,0 +1,4 @@
+---
+ansible_user                  : root
+ansible_ssh_private_key_file  : /home/alex/.ssh/target_key.pub
+
