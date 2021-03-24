@@ -5,4 +5,4 @@ logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/flask_app/")
 
 from flask_app import app as application
-# application.secret_key = 'Add your secret key'
+application.secret_key = '123'

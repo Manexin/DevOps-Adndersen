@@ -3,7 +3,6 @@
   hosts: "{{ MYHOSTS }}"
   become: yes
 
-#  vars:
 
   tasks:
 
@@ -39,7 +38,7 @@
       apt: name={{ item }} state=latest
       loop:
         - python3-pip
-        - python3-virtualenv
+        - python3-venv
 
     - name: Install rsync
       apt: name=rsync state=latest
@@ -79,6 +78,47 @@
       dest: /var/www/flask_app
     notify:
         - Restart Apache Debian
+
+#-----------------------Install VENV FLASK------------------------
+  - name: Install virtualenv
+    pip: name={{ item }} state=latest
+    loop:
+        - virtualenv
+        - numpy
+
+  - name: Create venv and installing packages Flask, emoji
+    pip:
+      name:
+        - flask
+        - emoji
+      virtualenv: "/var/www/flask_app/flask_app/venv"
+      virtualenv_command: python3 -m venv
+      state: present
+ 
+
+  - name: Copy flask_app.service
+    copy:
+      src: /home/alex/MyRepo/DevOps-Adndersen/Ansible_assigment/ansible/files/flask_app.service
+      dest: /etc/systemd/system/flask_app.service
+
+  - name: Start service flask_app
+    service:
+      name: flask_app
+      state: started
+      enabled: yes
+
+#-----------------------------------------------------------------
+
+  - name: allow WWW Full OpenSSH for UFW
+    community.general.ufw:
+       rule: allow
+       name: '{{ item }}'
+    loop:
+      - "WWW Full"
+      - "OpenSSH"
+
+  - name: Started UFW
+    service: name=ufw state=started enabled=yes
 
   handlers:
 

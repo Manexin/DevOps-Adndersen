@@ -1,19 +1,17 @@
 [Unit]
 Description=flask_app
-After=syslog.target
 After=network.target
 After=apache2.service
-After=venv.service
 
 [Service]
-Type=forking
+Type=simple
 WorkingDirectory=/var/www/flask_app
 
-User=flask_app
+User=alex
 Group=www-data
 
-Environment=RACK_ENV=production
-
+Environment="PATH=/var/www/flask_app/flask_app/venv/bin
+ExecStart=/bin/env python3 /var/www/flask_app/flask_app/app.py
 OOMScoreAdjust=-1000
 
 #ExecStart=/usr/local/bin/bundle exec service -C /work/www/myunit/shared/config/service.rb --daemon
