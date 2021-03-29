@@ -1,6 +1,6 @@
 ## How to use it
 
-----
+****
 There are two playbooks in the repository, working playbook `plbk1.yml`,<br>
 the second playbook would do the same but by roles.
 For now, we going to work with the first playbook.<br>
@@ -10,7 +10,7 @@ And also you can to specify the username and path to the public key.<br>
 This can be done in the host or edit the corresponding file in the `group-vars` directory.<br>
 The playbook uses external variables, so you need to start the playbook like this:<br>
 `ansible-playbook plbk1.yml -e "MYHOSTS=PROD"`<br>
-----
+****
 The playbook going to make the following:<br>
 >1-Update Deb-cache<br>
 >2-Install curl<br>
