@@ -3,13 +3,19 @@
   hosts: "{{ MYHOSTS }}"
   become: yes
   
-  tasks:
+#  roles:
+#  - check_ping (finish)
+#  - installing_software
+#  - copy_files
+#  - conf_ufw(finish)
+#  - started_service 
 
+  tasks:
+#----------------INSTALL-------------
   - name: 1-Update Deb
     apt:
        update-cache: yes
 
-#----------------INSTALL-------------
   - name: 2-Install curl
     apt: name=curl state=latest
 
