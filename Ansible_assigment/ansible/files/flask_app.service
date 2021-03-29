@@ -5,13 +5,14 @@ After=apache2.service
 
 [Service]
 Type=simple
-WorkingDirectory=/var/www/flask_app
+WorkingDirectory=/var/www/flask_app/flask_app/
 
 User=alex
 Group=www-data
 
 Environment="PATH=/var/www/flask_app/flask_app/venv/bin
-ExecStart=/bin/env python3 /var/www/flask_app/flask_app/app.py
+#ExecStartPre=/var/www/flask_app/flask_app/venv/bin/python3
+ExecStart=/var/www/flask_app/flask_app/venv/bin/flask run
 OOMScoreAdjust=-1000
 
 #ExecStart=/usr/local/bin/bundle exec service -C /work/www/myunit/shared/config/service.rb --daemon

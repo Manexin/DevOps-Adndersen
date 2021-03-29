@@ -1,0 +1,141 @@
+---
+- name: Test connection to my servers
+  hosts: "{{ MYHOSTS }}"
+  become: yes
+  
+  tasks:
+
+  - name: 1-Update Deb
+    apt:
+       update-cache: yes
+
+#----------------INSTALL-------------
+  - name: 2-Install curl
+    apt: name=curl state=latest
+
+  - name: 3-Install rsync
+    apt: name=rsync state=latest
+
+  - name: 4-Install UFW
+    apt: name=ufw state=latest
+
+  - name: 5-Install Apache Web server for Debian
+    apt: name=apache2 state=latest
+
+  - name: 6-Install mod_wsgi
+    apt: name=libapache2-mod-wsgi-py3 state=latest
+
+  - name: 7-Instal Python3
+    apt: name=python3 state=latest
+
+  - name: 8-Install PIP, venv
+    apt: name={{ item }} state=latest
+    loop:
+        - python3-pip
+        - python3-venv
+
+  - name: 9-Install virtualenv
+    pip: name={{ item }} state=latest
+    loop:
+        - virtualenv
+        - numpy
+
+  - name: 9a-Create venv and installing packages Flask, emoji
+    pip:
+      name:
+        - flask
+        - emoji
+      virtualenv: "/var/www/flask_app/flask_app/venv"
+      virtualenv_command: pyvenv
+#            - python3 -m venv
+#            - flask run
+      state: present
+
+#---------COPY-FILES-------------
+
+  - name: 10-Copy file wsgi
+    copy:
+       src: ./files/flask_app.wsgi
+       dest: /var/www/flask_app/
+       owner: root
+       group: root
+       mode: '0764'
+    notify:
+       - Restart Apache Debian
+
+  - name: 11-Copy file apache
+    copy:
+       src: ./files/flask_app.conf
+       dest: /etc/apache2/sites-available/
+       owner: root
+       group: root
+       mode: '0644'
+    notify:
+       - Restart Apache Debian
+
+  - name: 12-Create folder for app
+    file: path=/var/www/flask_app state=directory
+
+  - name: 13-Synchronization of src on the control machine to dest on the remote hosts
+    synchronize:
+      mode: push
+      src: ./roles/copy_files/files/flask_app
+      dest: /var/www/flask_app
+    notify:
+        - Restart Apache Debian
+
+  - name: 14-Copy flask_app.service
+    copy:
+      src: ./files/flask_app.service
+      dest: /etc/systemd/system/flask_app.service
+
+#--------------config-UFW------------------
+
+  - name: 15a-Copy file rule for flask
+    copy:
+       src: ./files/rule_flask 
+       dest: /etc/ufw/applications.d
+       owner: root
+       group: root
+       mode: '0644'
+    notify:
+       - Restart UFW
+
+  - name: 15-added rules of UFW
+    community.general.ufw:
+       rule: allow
+       name: '{{ item }}'
+    loop:
+      - "WWW Full"
+      - "OpenSSH"
+      - "flask_emoji"
+    notify:
+       - Restart UFW
+
+#--------------STARTED-SERVICES----------
+
+  - name: 16-Start Apache Web Server Debian
+    service: name=apache2 state=started enabled=yes
+
+  - name: 17-Start wsgi
+    command: a2enmod wsgi
+    notify:
+        - Restart Apache Debian
+
+  - name: 18-Started UFW
+    service: name=ufw state=started enabled=yes
+
+  - name: 19-Start service flask_app
+    service:
+      name: flask_app
+      state: started
+      enabled: yes
+
+  handlers:
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+
+  - name: Restart UFW
+    service: name=ufw state=reloaded
