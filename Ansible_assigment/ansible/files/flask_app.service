@@ -12,7 +12,7 @@ Group=www-data
 
 Environment="PATH=/var/www/flask_app/flask_app/venv/bin
 #ExecStartPre=/var/www/flask_app/flask_app/venv/bin/python3
-ExecStart=/var/www/flask_app/flask_app/venv/bin/flask run
+ExecStart=/var/www/flask_app/flask_app/venv/bin/flask run --host=0.0.0.0 --port=8080
 OOMScoreAdjust=-1000
 
 #ExecStart=/usr/local/bin/bundle exec service -C /work/www/myunit/shared/config/service.rb --daemon

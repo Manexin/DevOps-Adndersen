@@ -144,4 +144,4 @@
     when: ansible_os_family == "Debian"
 
   - name: Restart UFW
-    service: name=ufw state=reloaded
+    service: name=ufw state=restarted

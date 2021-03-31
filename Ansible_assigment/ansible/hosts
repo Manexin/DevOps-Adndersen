@@ -3,6 +3,7 @@ debian-tar2 ansible_host=192.168.0.97
 
 [PROD]
 debian3 ansible_host=192.168.0.99
+LAST-DEB ansible_host=192.168.0.77
 
 [ALL_SERVERS:children]
 STAGING
