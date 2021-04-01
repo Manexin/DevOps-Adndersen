@@ -1,64 +1,64 @@
 # DevOps course
-### Этот репозиторий создан для выполнения домашних заданий в рамках курса DevOps от компании [Andersen](https://andersenlab.com/)
+### This repository is created for doing homework as part of the company's DevOps course [Andersen](https://andersenlab.com/)
 ***
-По мере выполнения заданий я буду дополнять REDME.md описанием выполнения работы, возникшими проблемами и способами их решения, а также полезными ссылками, где я черпал вдохновение.)
+As you complete the tasks, I will add README.md a description of the work done, the problems encountered and how to solve them, as well as useful links where I drew inspiration. :smirk:
 ***
-# Поехали!
-## Подготовка рабочего окружения.
-Для выполнения работ в моем распоряжении имеется:<br>
+# Let's start!
+## Preparing the working environment.
+To perform the work, I have at my disposal:<br>
  `Processor	AMD Ryzen 5 3600 6-Core Processor, 3593 Mhz, 6 Core(s), 12 Logical Processor(s)`<br>
  `Installed Physical Memory (RAM)	16.0 GB`<br>
  `OS Name	Microsoft Windows 10 Enterprise LTSC`<br>
  `Version	10.0.17763 Build 17763`<br>
 ***
-По заданию нам понадобиться host и target с Debian 10.<br>
-Для этого устанавливаем `VirtualBox Graphical User Interface Version 6.1.16 r140961 (Qt5.6.2)`<br>
-Создаем новую виртуальную машину:
-  * Указываем имя *VM*
-  * Выбираем тип *Linux*
-  * Выбираем версию  *Debian(64-bit)*
-  * Выбираем размер оперативной памяти (я делал 4096MB для каждой VM)
-  * Выбираем создать виртуальный диск (если диск уже есть, то указываем его)
-  * Указываем тип виртуального диска (*VDI*)
-  * Задаем динамический размер диска
-  * И указываем максимальный размер диска
+According to the task, we will need a host and target with Debian 10.<br>
+To do this, install `VirtualBox Graphical User Interface Version 6.1.16 r140961 (Qt5.6.2)`<br>
+Creating a new VM:
+* Specify the name * VM*
+* Select the type * Linux*
+* Select the version * Debian (64-bit)*
+* Select the size of RAM (I did 4096MB for each VM)
+* Select create a virtual disk (if the disk is already there, then specify it)
+* Specify the virtual disk type (*VDI*)
+* Set the dynamic disk size
+* And specify the maximum disk size
  ****
-Далее нам надо скачать дистрибутив Debian 10, берем его [здесь](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.8.0-amd64-netinst.iso).
-Вставляем его в виртуальный дисковод созданной VM и запускаем ее. При установке следуем инструкциям и рекомендациям (читаем доки). Критериев по установке Debian 10 особых не было, по этому я устанавливаю версию с GUI, SSH server, standart system utilities.
-После установки Debian настраиваем сеть. В VirtualBox на нашей машине меняем тип сетевого адаптера с NAT на Brige. Если удаленно подключаться не планируем, то можно не менять. А для удаленной работы мешает NAT.
-Устанавливаем пакеты sudo, net-tools (говорят что это для староверов, но я пользуюсь).<br>
-`$ su root` \\логично, что если sudo нет, то устанавливаем от имени root<br>
-`Password:` \\пароль<br>
-`$ apt update` \\ обновляем ссылки<br>
-`$ apt install sudo` \\ устанавливаем sudo<br>
-`$ apt install net-tools` \\ устанавливаем net-tools<br>
-Пакет sudo мы установили, осталось добавить нашего пользователя в нужные группы.<br>
-Это делается так<br>
+Next, we need to download the Debian 10 distribution, take it [here](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.8.0-amd64-netinst.iso).
+Insert it into the virtual disk drive of the created VM and run it. When installing, follow the instructions and recommendations (read the docks). There were no special criteria for installing Debian 10, so I install the version with GUI, SSH server, and standart system utilities.
+After installing Debian, we configure the network. In VirtualBox on our machine, we change the type of network adapter from NAT to Bridge. If you do not plan to connect remotely, you can not change it. And for remote work, NAT interferes.
+We install the sudo, net-tools packages (they say that this is for old believers, but I use it).<br>
+`$ su root` \\it is logical that if there is no sudo, then install it as root<br>
+`Password:` \\password<br>
+`$ apt update` \\ updating links<br>
+`$ apt install sudo` \\ installing sudo<br>
+`$ apt install net-tools` \\ installing net-tools<br>
+We have installed the sudo package, all that remains is to add our user to the necessary groups.<br>
+This is done like this<br>
 `$ usermod -aG sudo user`<br>
-или так, открываем<br>
-`$sudo nano /etc/group` и дописываем пользователя в нужные группы.<br>
-После этого необходимо перезагрузится `$ sudo reboot`<br>
-Устанавливаем `Guest Additions:`
-  * CD в виртуальный дисковод.
-  * Про autorun забываем, он тут не работает (по крайней мере у меня не работал).
-  * Заходим на диск `$ cd /media/cdrom`
-  * И запускаем скрипт `$ sudo sh ./VBoxLinuxAdditions.run`
-  * Наслаждаемся.
+or so, open it<br>
+`$sudo nano /etc/group` and add the user to the necessary groups.<br>
+After that, you need to reboot `$ sudo reboot`<br>
+Installing it `Guest Additions:`
+  * CD to the virtual disk drive.
+  * We forget about autorun, it doesn't work here (at least it didn't work for me).
+  * Go to the disk `$ cd /media/cdrom`
+  * And run the script `$ sudo sh ./VBoxLinuxAdditions.run`
+  * Enjoy it.
 
-### Вроде бы можно работать.
-### Чуть не забыл, настраиваем *ssh*!
-Проверяем запущена ли служба *ssh*<br>
+### It seems to be possible to work.
+### I almost forgot, setting up * ssh*!
+Checking whether the service is running *ssh*<br>
 `$ sudo service ssh status`<br>
-если служба отключена, то<br>
+if the service is disabled, then<br>
 `$sudo service ssh start`<br>
-Генерим пару ssh ключей, они нам понадобятся в дальнейшем.<br>
+Generate a pair of ssh keys, we will need them in the future.<br>
 `$ ssh-keygen`<br>
-и сообщаем системе (ssh-agent) о наших ключах<br>
+and we inform the system (ssh-agent) about our keys<br>
 `$ ssh-add`<br>
-`~/.ssh/id_rsa` это закрытый ключ, никому его не показываем!<br>
-`~/.ssh/id_rsa_pub` это публичный ключ<br>
+`~/.ssh/id_rsa` this is a private key, we do not show it to anyone!<br>
+`~/.ssh/id_rsa_pub` this is a public key<br>
 
-## Ну все, теперь вроде готовы. Для удаленного доступа я пользуюсь MobaXterm, но если любите все старое, то можно putty)))
+## Well, that's it, now we seem to be ready. For remote access, I use MobaXterm, but if you like everything old, then you can putty)))
 ****
  
-Для выполнения первой домашней работы созданы дириктории соответствующие назвыниям заданий. В каждой из них в файле README.md будет описан ход выполнения заданий, а также проблемы и сложности с которыми придется столкнуться в процессе их выполнения.
+To perform the first homework, directories corresponding to the task names are created. In each of them in the file README.md it will describe the progress of the tasks, as well as the problems and difficulties that you will have to face in the process of completing them.
