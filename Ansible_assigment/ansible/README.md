@@ -1,7 +1,13 @@
-## Installation app to servers.
+## How to use it
 
-There are two playbooks in the repository, working playbook `plbk1.yml`, the second playbook would do the same but by roles. For now, we going to work with the first playbook.<br>
-There are two groups in the file host **[STAGING]** and **[PROD]**. Add your servers to the appropriate group. And also you can to specify the username and path to the public key. This can be done in the host file or edit the corresponding file in the `group-vars` directory.<br>
+****
+There are two playbooks in the repository, working playbook `plbk1.yml`,<br>
+the second playbook would do the same but by roles.
+For now, we going to work with the first playbook.<br>
+There are two groups in the fale host **[STAGING]** and **[PROD]**.<br>
+Add your servers to the appropriate group.<br> 
+And also you can to specify the username and path to the public key.<br>
+This can be done in the host or edit the corresponding file in the `group-vars` directory.<br>
 The playbook uses external variables, so you need to start the playbook like this:<br>
 `ansible-playbook plbk1.yml -e "MYHOSTS=PROD"`<br>
 ****
