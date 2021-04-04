@@ -1,23 +1,13 @@
 ---
 # tasks file for conf_ufw
-
-- name: 15a-Copy file rule for flask
-  copy:
-     src: ./files/rule_flask
-     dest: /etc/ufw/applications.d
-     owner: root
-     group: root
-     mode: '0644'
-  notify:
-     - Restart UFW
-
-- name: 15-added rules of UFW
+- name: allow WWW Full OpenSSH for UFW
   community.general.ufw:
      rule: allow
      name: '{{ item }}'
   loop:
-     - "WWW Full"
-     - "OpenSSH"
-     - "flask_emoji"
-  notify:
-       - Restart UFW
+    - "WWW Full"
+    - "OpenSSH"
+
+- name: Started UFW
+  service: name=ufw state=started enabled=yes
+
