@@ -1,0 +1,21 @@
+data_directory = '/var/lib/postgresql/11/main'
+
+
+sudo su postgres
+wal_level = logical 
+wal_log_hints = on 
+archive_mode = on
+archive_command = 'cp -i %p /var/lib/postgresql/11/main/archive/%f'
+max_wal_senders = 15
+hot_standby = on
+
+mkdir -p /app/postgresql/pgdatabase/data/archive
+
+
+CREATE TABLE hw_db (c1 integer, c2 text);
+
+INSERT INTO hw_db
+SELECT i, md5(random()::text)
+FROM generate_series(1, 10000000)AS i;
+
+SELECT * FROM hw_db limit 10;
