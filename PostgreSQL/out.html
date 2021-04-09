@@ -4,9 +4,9 @@
 <title>pgBadger :: PostgreSQL Log Analyzer</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="robots" content="noindex,nofollow">
-<meta http-equiv="Expires" content="Fri Apr  9 08:45:13 2021">
+<meta http-equiv="Expires" content="Fri Apr  9 23:53:58 2021">
 <meta http-equiv="Generator" content="pgBadger v11.5">
-<meta http-equiv="Date" content="Fri Apr  9 08:45:13 2021">
+<meta http-equiv="Date" content="Fri Apr  9 23:53:58 2021">
 <link rel="shortcut icon" href="data:image/x-icon;base64,
 AAABAAEAIyMQAAEABAA8BAAAFgAAACgAAAAjAAAARgAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAgAAGRsZACgqKQA2OTcASEpJAFpdWwBoa2kAeHt5AImMigCeoZ8AsLOxAMTHxQDR1NIA
@@ -334,9 +334,9 @@ qCixqwXwk8FgKACwPy8vzyIqmpqa8IeJG6DvJv8DFUCCOQ08CmkAAAAASUVORK5CYII=
 			<div class="tab-pane active" id="tab-info">
 			
 <ul>
-<li>Generated on Fri Apr  9 08:45:13 2021</li>
+<li>Generated on Fri Apr  9 23:53:58 2021</li>
 <li>Log file: /var/log/postgresql/postgresql-11-main.log</li>
-<li>Parsed 456 log entries in 2s</li>
+<li>Parsed 459 log entries in 2s</li>
 <li>Log start from 2021-04-07 09:41:21 to 2021-04-08 18:30:48</li>
 </ul>
 
@@ -2718,7 +2718,7 @@ add_download_button_event(17, 'checkpointdistance_graph');
 		<div class="well key-figures">
 			<ul>
 				<li><span class="figure">0 per second</span> <span class="figure-label">Cancelled query Peak</span></li>
-				<li><span class="figure">2021-04-08 00:16:45</span> <span class="figure-label">Date</span></li>
+				<li><span class="figure">2021-04-07 21:35:33</span> <span class="figure-label">Date</span></li>
 			</ul>
 		</div>
 	</div>
@@ -3290,7 +3290,7 @@ add_download_button_event(41, 'most_frequent_error_4');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-5">
 					<div id="event-c-5" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "...", user "...", database "...", SSL on</span></p>
+					<p class="error-pre"><span class="text-danger">ERROR:  relation "..." does not exist</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_5" class="collapse">
@@ -3299,7 +3299,7 @@ add_download_button_event(41, 'most_frequent_error_4');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_5').on("shown.bs.collapse",function(){
-	var bars_42 = [['00:00',2],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',1]];
+	var bars_42 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',2],['18:00',0],['19:00',0],['20:00',0],['21:00',1],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_5 = create_bargraph('most_frequent_error_5', '', 'Events', [ bars_42 ], '');
 });
@@ -3317,7 +3317,7 @@ add_download_button_event(42, 'most_frequent_error_5');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 07</td><td>23</td><td>1</td></tr><tr><td>Apr 08</td><td>00</td><td>2</td></tr>
+										<tr><td>Apr 07</td><td>17</td><td>2</td></tr><tr><td></td><td>21</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_5">x Hide</button></p>
@@ -3327,69 +3327,6 @@ add_download_button_event(42, 'most_frequent_error_5');
 
 						<!-- Examples collapse -->
 						<div id="most-frequent-errors-events-examples-rank-5" class="collapse">
-							<dl>
-
-								<dt><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "192.168.0.95", user "replicator", database "hw_db2", SSL on</span></dt>
-								<p></p>
-								<pre><b>Date:</b> 2021-04-07 23:25:03
-</pre>
-
-								<dt><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "192.168.0.95", user "postgres", database "hw_db2", SSL on</span></dt>
-								<p></p>
-								<pre><b>Date:</b> 2021-04-08 00:15:55
-</pre>
-
-							</dl>
-							<p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#most-frequent-errors-events-examples-rank-5">x Hide</button></p>
-						</div>
-						<!-- end of details collapse -->
-					</td>
-				</tr>
-
-				<tr>
-				<td>6</td>
-				<td>3
-					<p><a href="#Amost_frequent_error_6" class="btn btn-default btn-xs" data-toggle="collapse">Details</a></p>
-				</td>
-				<td id="most-frequent-errors-events-examples-details-rank-6">
-					<div id="event-c-6" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-danger">ERROR:  relation "..." does not exist</span></p>
-					</div>
-						<!-- Details collapse -->
-					    <div id="Amost_frequent_error_6" class="collapse">
-						<h3>Times Reported <small>Most Frequent Error / Event #6</small></h3>
-						<div id="most_frequent_error_6" class="jqplot-graph histo-graph"></div>
-<script type="text/javascript">
-/* <![CDATA[ */
-$('#Amost_frequent_error_6').on("shown.bs.collapse",function(){
-	var bars_43 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',2],['18:00',0],['19:00',0],['20:00',0],['21:00',1],['22:00',0],['23:00',0]];
-	
-	var most_frequent_error_6 = create_bargraph('most_frequent_error_6', '', 'Events', [ bars_43 ], '');
-});
-create_download_button(43, 'btn btn-default btn-xs');
-add_download_button_event(43, 'most_frequent_error_6');
-/* ]]> */
-</script>
-
-								<table class="table table-stripped table-condensed">
-									<thead>
-										<tr>
-											<th>Day</th>
-											<th>Hour</th>
-											<th>Count</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr><td>Apr 07</td><td>17</td><td>2</td></tr><tr><td></td><td>21</td><td>1</td></tr>
-									</tbody>
-								</table>
-						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_6">x Hide</button></p>
-						</div><!-- end of details collapse -->
-
-<p><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#most-frequent-errors-events-examples-rank-6">Examples</button></p>
-
-						<!-- Examples collapse -->
-						<div id="most-frequent-errors-events-examples-rank-6" class="collapse">
 							<dl>
 
 								<dt><span class="text-danger">ERROR:  relation "hw_db" does not exist at character 13</span></dt>
@@ -3410,6 +3347,64 @@ add_download_button_event(43, 'most_frequent_error_6');
 </pre>
 
 							</dl>
+							<p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#most-frequent-errors-events-examples-rank-5">x Hide</button></p>
+						</div>
+						<!-- end of details collapse -->
+					</td>
+				</tr>
+
+				<tr>
+				<td>6</td>
+				<td>3
+					<p><a href="#Amost_frequent_error_6" class="btn btn-default btn-xs" data-toggle="collapse">Details</a></p>
+				</td>
+				<td id="most-frequent-errors-events-examples-details-rank-6">
+					<div id="event-c-6" class="sql sql-mediumsize">
+					<p class="error-pre"><span class="text-danger">ERROR:  database "..." does not exist</span></p>
+					</div>
+						<!-- Details collapse -->
+					    <div id="Amost_frequent_error_6" class="collapse">
+						<h3>Times Reported <small>Most Frequent Error / Event #6</small></h3>
+						<div id="most_frequent_error_6" class="jqplot-graph histo-graph"></div>
+<script type="text/javascript">
+/* <![CDATA[ */
+$('#Amost_frequent_error_6').on("shown.bs.collapse",function(){
+	var bars_43 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',3],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	
+	var most_frequent_error_6 = create_bargraph('most_frequent_error_6', '', 'Events', [ bars_43 ], '');
+});
+create_download_button(43, 'btn btn-default btn-xs');
+add_download_button_event(43, 'most_frequent_error_6');
+/* ]]> */
+</script>
+
+								<table class="table table-stripped table-condensed">
+									<thead>
+										<tr>
+											<th>Day</th>
+											<th>Hour</th>
+											<th>Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr><td>Apr 07</td><td>15</td><td>3</td></tr>
+									</tbody>
+								</table>
+						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_6">x Hide</button></p>
+						</div><!-- end of details collapse -->
+
+<p><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#most-frequent-errors-events-examples-rank-6">Examples</button></p>
+
+						<!-- Examples collapse -->
+						<div id="most-frequent-errors-events-examples-rank-6" class="collapse">
+							<dl>
+
+								<dt><span class="text-danger">ERROR:  database "hw_db" does not exist</span></dt>
+								<p><b>Statement:</b> grant all privileges on database hw_db to replicator;<br/></p>
+								<pre><b>Date:</b> 2021-04-07 15:22:38
+</pre>
+
+							</dl>
 							<p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#most-frequent-errors-events-examples-rank-6">x Hide</button></p>
 						</div>
 						<!-- end of details collapse -->
@@ -3423,7 +3418,7 @@ add_download_button_event(43, 'most_frequent_error_6');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-7">
 					<div id="event-c-7" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-danger">ERROR:  database "..." does not exist</span></p>
+					<p class="error-pre"><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "...", user "...", database "...", SSL on</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_7" class="collapse">
@@ -3432,7 +3427,7 @@ add_download_button_event(43, 'most_frequent_error_6');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_7').on("shown.bs.collapse",function(){
-	var bars_44 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',3],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_44 = [['00:00',2],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',1]];
 	
 	var most_frequent_error_7 = create_bargraph('most_frequent_error_7', '', 'Events', [ bars_44 ], '');
 });
@@ -3450,7 +3445,7 @@ add_download_button_event(44, 'most_frequent_error_7');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 07</td><td>15</td><td>3</td></tr>
+										<tr><td>Apr 07</td><td>23</td><td>1</td></tr><tr><td>Apr 08</td><td>00</td><td>2</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_7">x Hide</button></p>
@@ -3462,9 +3457,14 @@ add_download_button_event(44, 'most_frequent_error_7');
 						<div id="most-frequent-errors-events-examples-rank-7" class="collapse">
 							<dl>
 
-								<dt><span class="text-danger">ERROR:  database "hw_db" does not exist</span></dt>
-								<p><b>Statement:</b> grant all privileges on database hw_db to replicator;<br/></p>
-								<pre><b>Date:</b> 2021-04-07 15:22:38
+								<dt><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "192.168.0.95", user "replicator", database "hw_db2", SSL on</span></dt>
+								<p></p>
+								<pre><b>Date:</b> 2021-04-07 23:25:03
+</pre>
+
+								<dt><span class="text-fatal">FATAL:  no pg_hba.conf entry for host "192.168.0.95", user "postgres", database "hw_db2", SSL on</span></dt>
+								<p></p>
+								<pre><b>Date:</b> 2021-04-08 00:15:55
 </pre>
 
 							</dl>
@@ -3539,7 +3539,7 @@ add_download_button_event(45, 'most_frequent_error_8');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-9">
 					<div id="event-c-9" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-fatal">FATAL:  could not open log file "...": No such file or directory</span></p>
+					<p class="error-pre"><span class="text-success">LOG:  database system was not properly shut down; automatic recovery in progress</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_9" class="collapse">
@@ -3548,7 +3548,7 @@ add_download_button_event(45, 'most_frequent_error_8');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_9').on("shown.bs.collapse",function(){
-	var bars_46 = [['00:00',1],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_46 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',1],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_9 = create_bargraph('most_frequent_error_9', '', 'Events', [ bars_46 ], '');
 });
@@ -3566,7 +3566,7 @@ add_download_button_event(46, 'most_frequent_error_9');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 08</td><td>00</td><td>1</td></tr>
+										<tr><td>Apr 07</td><td>16</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_9">x Hide</button></p>
@@ -3578,9 +3578,9 @@ add_download_button_event(46, 'most_frequent_error_9');
 						<div id="most-frequent-errors-events-examples-rank-9" class="collapse">
 							<dl>
 
-								<dt><span class="text-fatal">FATAL:  could not open log file "/var/log/postgresquerylog/postgresql.log": No such file or directory</span></dt>
+								<dt><span class="text-success">LOG:  database system was not properly shut down; automatic recovery in progress</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-08 00:37:22
+								<pre><b>Date:</b> 2021-04-07 16:55:18
 </pre>
 
 							</dl>
@@ -3597,7 +3597,7 @@ add_download_button_event(46, 'most_frequent_error_9');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-10">
 					<div id="event-c-10" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-success">LOG:  database system was not properly shut down; automatic recovery in progress</span></p>
+					<p class="error-pre"><span class="text-success">LOG:  database system was interrupted; last known up at  ...</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_10" class="collapse">
@@ -3636,9 +3636,9 @@ add_download_button_event(47, 'most_frequent_error_10');
 						<div id="most-frequent-errors-events-examples-rank-10" class="collapse">
 							<dl>
 
-								<dt><span class="text-success">LOG:  database system was not properly shut down; automatic recovery in progress</span></dt>
+								<dt><span class="text-success">LOG:  database system was interrupted; last known up at 2021-04-07 15:51:57 +03</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-07 16:55:18
+								<pre><b>Date:</b> 2021-04-07 16:55:02
 </pre>
 
 							</dl>
@@ -3655,7 +3655,7 @@ add_download_button_event(47, 'most_frequent_error_10');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-11">
 					<div id="event-c-11" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-danger">ERROR:  base backup could not send data, aborting backup</span></p>
+					<p class="error-pre"><span class="text-fatal">FATAL:  terminating connection due to administrator command</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_11" class="collapse">
@@ -3664,7 +3664,7 @@ add_download_button_event(47, 'most_frequent_error_10');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_11').on("shown.bs.collapse",function(){
-	var bars_48 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',1],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_48 = [['00:00',1],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_11 = create_bargraph('most_frequent_error_11', '', 'Events', [ bars_48 ], '');
 });
@@ -3682,7 +3682,7 @@ add_download_button_event(48, 'most_frequent_error_11');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 07</td><td>15</td><td>1</td></tr>
+										<tr><td>Apr 08</td><td>00</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_11">x Hide</button></p>
@@ -3694,9 +3694,9 @@ add_download_button_event(48, 'most_frequent_error_11');
 						<div id="most-frequent-errors-events-examples-rank-11" class="collapse">
 							<dl>
 
-								<dt><span class="text-danger">ERROR:  base backup could not send data, aborting backup</span></dt>
+								<dt><span class="text-fatal">FATAL:  terminating connection due to administrator command</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-07 15:14:54
+								<pre><b>Date:</b> 2021-04-08 00:37:21
 </pre>
 
 							</dl>
@@ -3713,7 +3713,7 @@ add_download_button_event(48, 'most_frequent_error_11');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-12">
 					<div id="event-c-12" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-fatal">FATAL:  terminating connection due to administrator command</span></p>
+					<p class="error-pre"><span class="text-fatal">FATAL:  could not open log file "...": No such file or directory</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_12" class="collapse">
@@ -3752,9 +3752,9 @@ add_download_button_event(49, 'most_frequent_error_12');
 						<div id="most-frequent-errors-events-examples-rank-12" class="collapse">
 							<dl>
 
-								<dt><span class="text-fatal">FATAL:  terminating connection due to administrator command</span></dt>
+								<dt><span class="text-fatal">FATAL:  could not open log file "/var/log/postgresquerylog/postgresql.log": No such file or directory</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-08 00:37:21
+								<pre><b>Date:</b> 2021-04-08 00:37:22
 </pre>
 
 							</dl>
@@ -3771,7 +3771,7 @@ add_download_button_event(49, 'most_frequent_error_12');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-13">
 					<div id="event-c-13" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-fatal">FATAL:  the database system is shutting down</span></p>
+					<p class="error-pre"><span class="text-fatal">FATAL:  connection to client lost</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_13" class="collapse">
@@ -3780,7 +3780,7 @@ add_download_button_event(49, 'most_frequent_error_12');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_13').on("shown.bs.collapse",function(){
-	var bars_50 = [['00:00',1],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_50 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',1],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_13 = create_bargraph('most_frequent_error_13', '', 'Events', [ bars_50 ], '');
 });
@@ -3798,7 +3798,7 @@ add_download_button_event(50, 'most_frequent_error_13');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 08</td><td>00</td><td>1</td></tr>
+										<tr><td>Apr 07</td><td>15</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_13">x Hide</button></p>
@@ -3810,9 +3810,9 @@ add_download_button_event(50, 'most_frequent_error_13');
 						<div id="most-frequent-errors-events-examples-rank-13" class="collapse">
 							<dl>
 
-								<dt><span class="text-fatal">FATAL:  the database system is shutting down</span></dt>
+								<dt><span class="text-fatal">FATAL:  connection to client lost</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-08 00:37:21
+								<pre><b>Date:</b> 2021-04-07 15:14:54
 </pre>
 
 							</dl>
@@ -3829,7 +3829,7 @@ add_download_button_event(50, 'most_frequent_error_13');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-14">
 					<div id="event-c-14" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-fatal">FATAL:  connection to client lost</span></p>
+					<p class="error-pre"><span class="text-fatal">FATAL:  the database system is shutting down</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_14" class="collapse">
@@ -3838,7 +3838,7 @@ add_download_button_event(50, 'most_frequent_error_13');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_14').on("shown.bs.collapse",function(){
-	var bars_51 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',1],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_51 = [['00:00',1],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_14 = create_bargraph('most_frequent_error_14', '', 'Events', [ bars_51 ], '');
 });
@@ -3856,7 +3856,7 @@ add_download_button_event(51, 'most_frequent_error_14');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 07</td><td>15</td><td>1</td></tr>
+										<tr><td>Apr 08</td><td>00</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_14">x Hide</button></p>
@@ -3868,9 +3868,9 @@ add_download_button_event(51, 'most_frequent_error_14');
 						<div id="most-frequent-errors-events-examples-rank-14" class="collapse">
 							<dl>
 
-								<dt><span class="text-fatal">FATAL:  connection to client lost</span></dt>
+								<dt><span class="text-fatal">FATAL:  the database system is shutting down</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-07 15:14:54
+								<pre><b>Date:</b> 2021-04-08 00:37:21
 </pre>
 
 							</dl>
@@ -3887,7 +3887,7 @@ add_download_button_event(51, 'most_frequent_error_14');
 				</td>
 				<td id="most-frequent-errors-events-examples-details-rank-15">
 					<div id="event-c-15" class="sql sql-mediumsize">
-					<p class="error-pre"><span class="text-success">LOG:  database system was interrupted; last known up at  ...</span></p>
+					<p class="error-pre"><span class="text-danger">ERROR:  base backup could not send data, aborting backup</span></p>
 					</div>
 						<!-- Details collapse -->
 					    <div id="Amost_frequent_error_15" class="collapse">
@@ -3896,7 +3896,7 @@ add_download_button_event(51, 'most_frequent_error_14');
 <script type="text/javascript">
 /* <![CDATA[ */
 $('#Amost_frequent_error_15').on("shown.bs.collapse",function(){
-	var bars_52 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',0],['16:00',1],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
+	var bars_52 = [['00:00',0],['01:00',0],['02:00',0],['03:00',0],['04:00',0],['05:00',0],['06:00',0],['07:00',0],['08:00',0],['09:00',0],['10:00',0],['11:00',0],['12:00',0],['13:00',0],['14:00',0],['15:00',1],['16:00',0],['17:00',0],['18:00',0],['19:00',0],['20:00',0],['21:00',0],['22:00',0],['23:00',0]];
 	
 	var most_frequent_error_15 = create_bargraph('most_frequent_error_15', '', 'Events', [ bars_52 ], '');
 });
@@ -3914,7 +3914,7 @@ add_download_button_event(52, 'most_frequent_error_15');
 										</tr>
 									</thead>
 									<tbody>
-										<tr><td>Apr 07</td><td>16</td><td>1</td></tr>
+										<tr><td>Apr 07</td><td>15</td><td>1</td></tr>
 									</tbody>
 								</table>
 						    <p class="pull-right"><button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Amost_frequent_error_15">x Hide</button></p>
@@ -3926,9 +3926,9 @@ add_download_button_event(52, 'most_frequent_error_15');
 						<div id="most-frequent-errors-events-examples-rank-15" class="collapse">
 							<dl>
 
-								<dt><span class="text-success">LOG:  database system was interrupted; last known up at 2021-04-07 15:51:57 +03</span></dt>
+								<dt><span class="text-danger">ERROR:  base backup could not send data, aborting backup</span></dt>
 								<p></p>
-								<pre><b>Date:</b> 2021-04-07 16:55:02
+								<pre><b>Date:</b> 2021-04-07 15:14:54
 </pre>
 
 							</dl>
