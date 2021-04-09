@@ -46,6 +46,13 @@ Ver Cluster Port Status Owner    Data directory              Log file
 
 sudo pg_ctlcluster 11 main start
 #-----------------------------
+#проверка логов если кластер не запускается
+systemctl status postgresql@11-main.service
+journalctl -xe
+#
+#
+#
+#
 sudo nano /etc/postgresql/11/main/postgresql.conf
 
 data_directory = '/var/lib/postgresql/11/main'
