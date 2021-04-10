@@ -80,7 +80,7 @@ log_temp_files = 0               # В лог будет попадать инф�
 #"Натравить" pgBadger на лог PostgreSQL'а
 pgbadger -a 1 /var/log/postgresql/postgresql-11-main.log
 #Параметры -а 1 означают, что количественную статистику утилита будет отображать с детализацией в 1 минуту
-
+pgbadger -a 1 -f /var/log/postgresquerylog/postgresql.log
 
 
 select usename,application_name,client_addr,backend_start,state,sync_state from pg_stat_replication;
