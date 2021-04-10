@@ -7,13 +7,13 @@ psql
 \q
 sudo -u postgres psql
 #создаем нового пользователя из командной строки
-sudo su - postgres -c "createuser replication"
+sudo su - postgres -c "createuser replicator"
 #создаем новую БД из командной строки
-sudo su - postgres -c "createdb newdb"
+sudo su - postgres -c "createdb hw_db"
 #подключаемся к серверу БД
 sudo -u postgres psql
 #наделяе пользователя правами
-grant all privileges on database newdb to replication;
+grant all privileges on database lab_db to replicator;
 #добавляем IP который будет слушать сервер БД '*'==любой адресс
 sudo nano /etc/postgresql/11/main/postgresql.conf	
 ---listen_addresses = '*'
@@ -82,7 +82,7 @@ pgbadger -a 1 /var/log/postgresql/postgresql-11-main.log
 #Параметры -а 1 означают, что количественную статистику утилита будет отображать с детализацией в 1 минуту
 pgbadger -a 1 -f /var/log/postgresquerylog/postgresql.log
 
-
+#проверка репликации
 select usename,application_name,client_addr,backend_start,state,sync_state from pg_stat_replication;
 
 #создаем таблицу 
